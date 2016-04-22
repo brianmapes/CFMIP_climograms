@@ -1,0 +1,251 @@
+;*************************************************************
+; IDL script for reading NetCDF file:
+;*************************************************************
+
+;;print, 'Warning:  If you have moved eul64x128_amip-120E_23.5N.2000.nc from ../Datasets/CAM/'+string(10B)+$
+;	string(9B)+'idl will not be able to open the file unless you modify'+$
+;	string(10B)+string(9B)+'the NCDF_OPEN line in this script to reflect the new path.'
+
+;ncid = NCDF_OPEN('../Datasets/CAM/eul64x128_amip-120E_23.5N.2000.nc')            ; Open The NetCDF file
+ncid = NCDF_OPEN(filename)
+
+;print, " Read in variable '23.5N'"
+NCDF_VARGET, ncid,  0, LAT23      ; Read in variable '23.5N'
+
+;print, " Read in variable '120E'"
+NCDF_VARGET, ncid,  1, LON120      ; Read in variable '120E'
+
+;print, " Read in variable 'P0'"
+NCDF_VARGET, ncid,  2, P0      ; Read in variable 'P0'
+
+;print, " Read in variable 'lat'"
+NCDF_VARGET, ncid,  3, lat      ; Read in variable 'lat'
+
+;print, " Read in variable 'lon'"
+NCDF_VARGET, ncid,  4, lon      ; Read in variable 'lon'
+
+;print, " Read in variable 'lev'"
+NCDF_VARGET, ncid,  5, lev      ; Read in variable 'lev'
+
+;print, " Read in variable 'ilev'"
+NCDF_VARGET, ncid,  6, ilev      ; Read in variable 'ilev'
+
+;print, " Read in variable 'isccp_prs'"
+NCDF_VARGET, ncid,  7, isccp_prs      ; Read in variable 'isccp_prs'
+
+;print, " Read in variable 'isccp_tau'"
+NCDF_VARGET, ncid,  8, isccp_tau      ; Read in variable 'isccp_tau'
+
+;print, " Read in variable 'isccp_prstau'"
+NCDF_VARGET, ncid,  9, isccp_prstau      ; Read in variable 'isccp_prstau'
+
+;print, " Read in variable 'time'"
+NCDF_VARGET, ncid,  10, time      ; Read in variable 'time'
+
+;print, " Read in variable 'time_bnds'"
+NCDF_VARGET, ncid,  11, time_bnds      ; Read in variable 'time_bnds'
+
+;print, " Read in variable 'date_written'"
+NCDF_VARGET, ncid,  12, date_written      ; Read in variable 'date_written'
+
+;print, " Read in variable 'time_written'"
+NCDF_VARGET, ncid,  13, time_written      ; Read in variable 'time_written'
+
+;print, " Read in variable 'ntrm'"
+NCDF_VARGET, ncid,  14, ntrm      ; Read in variable 'ntrm'
+
+;print, " Read in variable 'ntrn'"
+NCDF_VARGET, ncid,  15, ntrn      ; Read in variable 'ntrn'
+
+;print, " Read in variable 'ntrk'"
+NCDF_VARGET, ncid,  16, ntrk      ; Read in variable 'ntrk'
+
+;print, " Read in variable 'ndbase'"
+NCDF_VARGET, ncid,  17, ndbase      ; Read in variable 'ndbase'
+
+;print, " Read in variable 'nsbase'"
+NCDF_VARGET, ncid,  18, nsbase      ; Read in variable 'nsbase'
+
+;print, " Read in variable 'nbdate'"
+NCDF_VARGET, ncid,  19, nbdate      ; Read in variable 'nbdate'
+
+;print, " Read in variable 'nbsec'"
+NCDF_VARGET, ncid,  20, nbsec      ; Read in variable 'nbsec'
+
+;print, " Read in variable 'mdt'"
+NCDF_VARGET, ncid,  21, mdt      ; Read in variable 'mdt'
+
+;print, " Read in variable 'nlon'"
+NCDF_VARGET, ncid,  22, nlon      ; Read in variable 'nlon'
+
+;print, " Read in variable 'wnummax'"
+NCDF_VARGET, ncid,  23, wnummax      ; Read in variable 'wnummax'
+
+;print, " Read in variable 'hyai'"
+NCDF_VARGET, ncid,  24, hyai      ; Read in variable 'hyai'
+
+;print, " Read in variable 'hybi'"
+NCDF_VARGET, ncid,  25, hybi      ; Read in variable 'hybi'
+
+;print, " Read in variable 'hyam'"
+NCDF_VARGET, ncid,  26, hyam      ; Read in variable 'hyam'
+
+;print, " Read in variable 'hybm'"
+NCDF_VARGET, ncid,  27, hybm      ; Read in variable 'hybm'
+
+;print, " Read in variable 'gw'"
+NCDF_VARGET, ncid,  28, gw      ; Read in variable 'gw'
+
+;print, " Read in variable 'ndcur'"
+NCDF_VARGET, ncid,  29, ndcur      ; Read in variable 'ndcur'
+
+;print, " Read in variable 'nscur'"
+NCDF_VARGET, ncid,  30, nscur      ; Read in variable 'nscur'
+
+;print, " Read in variable 'date'"
+NCDF_VARGET, ncid,  31, date      ; Read in variable 'date'
+
+;print, " Read in variable 'datesec'"
+NCDF_VARGET, ncid,  33, datesec      ; Read in variable 'datesec'
+;print, 'got small fields'
+NCDF_VARGET, ncid,  36, CLDICE
+
+NCDF_VARGET, ncid,  37, CLDLIQ
+
+;print, " Read in variable 'CLDTOT'"
+NCDF_VARGET, ncid,  41, CLDTOT      ; Read in variable 'CLDTOT'
+
+;print, " Read in variable 'CLOUD'"
+NCDF_VARGET, ncid,  42, CLOUD      ; Read in variable 'CLOUD'
+
+;print, " Read in variable 'CNVCLD'"
+NCDF_VARGET, ncid,  46, CNVCLD      ; Read in variable 'CNVCLD'
+
+;print, " Read in variable 'CONCLD'"
+NCDF_VARGET, ncid,  47, CONCLD      ; Read in variable 'CONCLD'
+
+;print, " Read in variable 'DCQ'"
+NCDF_VARGET, ncid,  50, DCQ      ; Read in variable 'DCQ'
+
+;print, " Read in variable 'DTCOND'"
+NCDF_VARGET, ncid,  51, DTCOND      ; Read in variable 'DTCOND'
+
+;print, " Read in variable 'DTV'"
+NCDF_VARGET, ncid,  52, DTV      ; Read in variable 'DTV'
+
+;print, " Read in variable 'FLNS'"
+NCDF_VARGET, ncid,  54, FLNS      ; Read in variable 'FLNS'
+
+;print, " Read in variable 'FLNSC'"
+NCDF_VARGET, ncid,  55, FLNSC      ; Read in variable 'FLNSC'
+
+;print, " Read in variable 'FLNT'"
+NCDF_VARGET, ncid,  56, FLNT      ; Read in variable 'FLNT'
+
+;print, " Read in variable 'FLNTC'"
+NCDF_VARGET, ncid,  57, FLNTC      ; Read in variable 'FLNTC'
+
+;print, " Read in variable 'FLUT'"
+NCDF_VARGET, ncid,  58, FLUT      ; Read in variable 'FLUT'
+
+;print, " Read in variable 'FLUTC'"
+NCDF_VARGET, ncid,  59, FLUTC      ; Read in variable 'FLUTC'
+
+;print, " Read in variable 'FSDS'"
+NCDF_VARGET, ncid,  60, FSDS      ; Read in variable 'FSDS'
+
+;print, " Read in variable 'FSDSC'"
+NCDF_VARGET, ncid,  61, FSDSC      ; Read in variable 'FSDSC'
+
+;print, " Read in variable 'FSNS'"
+NCDF_VARGET, ncid,  62, FSNS      ; Read in variable 'FSNS'
+
+;print, " Read in variable 'FSNSC'"
+NCDF_VARGET, ncid,  63, FSNSC      ; Read in variable 'FSNSC'
+
+;print, " Read in variable 'FSNTOA'"
+NCDF_VARGET, ncid,  64, FSNTOA      ; Read in variable 'FSNTOA'
+
+;print, " Read in variable 'FSNTOAC'"
+NCDF_VARGET, ncid,  65, FSNTOAC      ; Read in variable 'FSNTOAC'
+
+;print, " Read in variable 'LHF'"
+NCDF_VARGET, ncid,  66, LHF      ; Read in variable 'LHF'
+
+;print, " Read in variable 'LWCF'"
+NCDF_VARGET, ncid,  67, LWCF      ; Read in variable 'LWCF'
+;print, 'got some biggies '
+;print, " Read in variable 'OMEGA'"
+NCDF_VARGET, ncid,  68, OMEGA      ; Read in variable 'OMEGA'
+
+;print, " Read in variable 'PBLH'"
+NCDF_VARGET, ncid,  69, PBLH      ; Read in variable 'PBLH'
+
+;print, " Read in variable 'PRECC'"
+NCDF_VARGET, ncid,  70, PRECC      ; Read in variable 'PRECC'
+
+;print, " Read in variable 'PRECL'"
+NCDF_VARGET, ncid,  71, PRECL      ; Read in variable 'PRECL'
+
+;print, " Read in variable 'PRECSH'"
+NCDF_VARGET, ncid,  72, PRECSH      ; Read in variable 'PRECSH'
+
+;print, " Read in variable 'PRECT'"
+NCDF_VARGET, ncid,  73, PRECT      ; Read in variable 'PRECT'
+
+;print, " Read in variable 'PS'"
+NCDF_VARGET, ncid,  74, PS      ; Read in variable 'PS'
+
+;print, " Read in variable 'Q'"
+NCDF_VARGET, ncid,  75, Q      ; Read in variable 'Q'
+
+;print, " Read in variable 'QRL'"
+NCDF_VARGET, ncid,  76, QRL      ; Read in variable 'QRL'
+
+;print, " Read in variable 'QRS'"
+NCDF_VARGET, ncid,  77, QRS      ; Read in variable 'QRS'
+
+;print, " Read in variable 'RELHUM'"
+NCDF_VARGET, ncid,  78, RELHUM      ; Read in variable 'RELHUM'
+
+;print, " Read in variable 'SHF' "
+NCDF_VARGET, ncid,  79, SHF      ; Read in variable 'SHF' 
+
+;print, " Read in variable 'SOLIN'"
+NCDF_VARGET, ncid,  80, SOLIN      ; Read in variable 'SOLIN'
+
+;print, " Read in variable 'SWCF'"
+NCDF_VARGET, ncid,  81, SWCF      ; Read in variable 'SWCF'
+;print, 'getting close now'
+;print, " Read in variable 'T'"
+NCDF_VARGET, ncid,  82, T      ; Read in variable 'T'
+
+;print, " Read in variable 'TREFHT'"
+NCDF_VARGET, ncid,  86, TREFHT      ; Read in variable 'TREFHT'
+
+;print, " Read in variable 'TS surface temp'"
+NCDF_VARGET, ncid,  87, TS     ; Read in variable 'TS surface temp'
+
+;print, " Read in variable 'U'"
+NCDF_VARGET, ncid,  88, U      ; Read in variable 'U'
+
+;print, " Read in variable 'V'"
+NCDF_VARGET, ncid,  89, V      ; Read in variable 'V'
+
+;print, " Read in variable "
+NCDF_VARGET, ncid,  90, VD01      ; Read in variable 
+
+;print, " Read in variable 'FLUC'"
+NCDF_VARGET, ncid,  91, FLUC      ; Read in variable 'FLUC'
+
+;print, " Read in variable 'FLU'"
+NCDF_VARGET, ncid,  92, FLU      ; Read in variable 'FLU'
+
+;print, " Read in variable 'FSUC'"
+NCDF_VARGET, ncid,  93, FSUC      ; Read in variable 'FSUC'
+
+;print, " Read in variable 'FSU'"
+NCDF_VARGET, ncid,  94, FSU      ; Read in variable 'FSU'
+
+;print, " Close the NetCDF file"
+NCDF_CLOSE, ncid      ; Close the NetCDF file

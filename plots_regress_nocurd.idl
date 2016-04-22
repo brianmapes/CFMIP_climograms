@@ -1,0 +1,244 @@
+;;;;; Make regression plots on a page, and also .sav files of the regression
+;;;;; arrays suitable for averaging
+
+;;; Length of lags regressions
+nlags = 6*SMOO +1 ;;; 6 days
+if(SMOO eq 5) then nlags = 4*SMOO +1 ;;; 6 days
+if(model_name eq 'KWAJ256') then nlags = 119
+
+;;;; Name stub for output .sav files
+if (n_elements(monames) gt 0) then mostr = monames(imo)
+namestub = MODEL_NAME + '.' + station_string + '.' + mostr
+
+;;;;; Page layout
+device, /landscape
+!p.multi=[0,2,3]
+timestamp
+
+;;;;;;;;;;;;;; Some things never change
+ts = rain
+tsunits = 'mm/h'
+tsnorm = rain/stdev(rain)
+tsnormunits = 'stdev'
+z = pplot
+zra = [1000,100]
+zunits = 'p (hPa)'
+t = tplot
+tin = tplot
+tunits = 'd'
+NEG_BAD = -1999 ;;; large enough to cover 1300 Wm-2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; TOA radiation plots
+
+predictand = SWUPTOA+LWTOA
+error = predictand*0+stdev(predictand)
+dataunits = 'Wm!U-2!N'
+label = 'OLR (dot), upSW (dash), sum (thick)'
+!y.style=1
+lag_ts_regression, ts, tsunits, predictand, error, dataunits, $
+  t, tunits, nlags, NEG_BAD, label, yrange=[-150,150], thick=5
+
+spawn, 'mv regress_ts_arrays.sav ../LAGARRAYS/'+namestub+'.TOAnet.sav'
+
+;;; LW
+predictand = LWTOA
+olag_ts_regression, ts, tsunits, predictand, error, dataunits, $
+                           t, tunits, nlags, NEG_BAD, label
+
+spawn, 'mv regress_ts_arrays.sav ../LAGARRAYS/'+namestub+'.TOA_LW.sav'
+
+;;; SWUP
+predictand = SWUPTOA
+olag_ts_regression, ts, tsunits, predictand, error, dataunits, $
+  t, tunits, nlags, NEG_BAD, label, LINESTYLE=2
+
+spawn, 'mv regress_ts_arrays.sav ../LAGARRAYS/'+namestub+'.TOA_SW.sav'
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; TOA radiation plots, NORMALIZED
+
+;predictand = SWUPTOA+LWTOA
+;error = predictand*0+stdev(predictand)
+;lag_ts_regression, tsnorm, tsnormunits, predictand, error, dataunits, $
+;  t, tunits, nlags, NEG_BAD, label, yrange=[-150,150], thick=5
+
+;predictand = LWTOA
+;olag_ts_regression, tsnorm, tsnormunits, predictand, error, dataunits, $
+;                           t, tunits, nlags, NEG_BAD, label
+;predictand = SWUPTOA
+;olag_ts_regression, tsnorm, tsnormunits, predictand, error, dataunits, $
+;  t, tunits, nlags, NEG_BAD, label, LINESTYLE=2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; LW CURD
+;data = LWcurd
+;dataunits ='W m!U-1!N'
+;error = data*0 +stdev(data)
+;conint = 0.01
+;label = 'LW CURD'
+
+;print, 'LW CURD regression'
+;lag_height_regression, ts, tsunits, data, error, dataunits, $
+;                           z, zunits, zra, tin, tunits, nlags, NEG_BAD, label, conint
+
+;spawn, 'mv regress_arrays.sav ../LAGARRAYS/'+namestub+'.CURD_LW.sav'
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SW CURD
+;data = SWcurd
+;dataunits ='W m!U-1!N'
+;error = data*0 +stdev(data)
+;conint = 0.01
+;label = 'SW CURD'
+
+;print, 'SW CURD regression'
+;lag_height_regression, ts, tsunits, data, error, dataunits, $
+;                           z, zunits, zra, tin, tunits, nlags, NEG_BAD, label, conint
+
+;spawn, 'mv regress_arrays.sav ../LAGARRAYS/'+namestub+'.CURD_SW.sav'
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; CLOUD
+data = cloudfraction*100
+dataunits ='%'
+error = data*0 +stdev(data)
+conint = 2
+label = 'cloud fraction'
+
+print, 'cloud fraction regression'
+lag_height_regression, ts, tsunits, data, error, dataunits, $
+                           z, zunits, zra, tin, tunits, nlags, NEG_BAD, label, conint
+
+spawn, 'mv regress_arrays.sav ../LAGARRAYS/'+namestub+'.cloudfraction.sav'
+
+conint = stdev(data)/50.
+;lag_height_regression, tsnorm, tsnormunits, data, error, dataunits, $
+;                           z, zunits, zra, tin, tunits, nlags, NEG_BAD, label, conint
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; CONDENSATE
+data = CWC
+dataunits ='g/kg'
+error = data*0 +stdev(data)
+conint = 0.005
+label = 'cloud water'
+
+print, 'condensate regression'
+lag_height_regression, ts, tsunits, data, error, dataunits, $
+                           z, zunits, zra, tin, tunits, nlags, NEG_BAD, label, conint
+
+spawn, 'mv regress_arrays.sav ../LAGARRAYS/'+namestub+'.cloudwater.sav'
+
+conint = stdev(data)/50.
+;lag_height_regression, tsnorm, tsnormunits, data, error, dataunits, $
+;                           z, zunits, zra, tin, tunits, nlags, NEG_BAD, label, conint
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;; RH
+data = RHplot
+dataunits = '%'
+label = 'RH'
+error = data*0 +stdev(data)
+conint = 1
+
+print, 'RH regression'
+lag_height_regression, ts, tsunits, data, error, dataunits, $
+                           z, zunits, zra, tin, tunits, nlags, NEG_BAD, label, conint
+
+spawn, 'mv regress_arrays.sav ../LAGARRAYS/'+namestub+'.RH.sav'
+
+conint = stdev(data)/50.
+;lag_height_regression, tsnorm, tsnormunits, data, error, dataunits, $
+;                           z, zunits, zra, tin, tunits, nlags, NEG_BAD, label, conint
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;; Divergence
+data = div
+dataunits = '10!u-6!N s!U-1!N'
+label = 'divergence'
+error = data*0 +stdev(data)
+conint = 1
+
+print, 'div regression'
+lag_height_regression, ts, tsunits, data, error, dataunits, $
+                           z, zunits, zra, tin, tunits, nlags, NEG_BAD, label, conint
+
+spawn, 'cp regress_arrays.sav div_regress.sav'
+spawn, 'mv regress_arrays.sav ../LAGARRAYS/'+namestub+'.div.sav'
+
+conint = stdev(data)/50.
+;lag_height_regression, tsnorm, tsnormunits, data, error, dataunits, $
+;                           z, zunits, zra, tin, tunits, nlags, NEG_BAD, label, conint
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;; T
+if(n_elements(tpert) eq 0) then Tpert = temp
+
+data = TPERT*10
+dataunits = 'dK'
+label = 'Temperature'
+error = data*0 +stdev(data)
+conint = 1
+
+;print, 'T regression'
+;lag_height_regression, ts, tsunits, data, error, dataunits, $
+;                           z, zunits, zra, tin, tunits, nlags, NEG_BAD, label, conint
+
+;spawn, 'mv regress_arrays.sav ../LAGARRAYS/'+namestub+'.T.sav'
+
+conint = stdev(data)/50.
+;lag_height_regression, tsnorm, tsnormunits, data, error, dataunits, $
+;                           z, zunits, zra, tin, tunits, nlags, NEG_BAD, label, conint
+
+;;;;;;;;;;;;;;;; Rain
+predictand = rain
+error = predictand*0+stdev(predictand)
+dataunits = 'mm/h'
+label = 'rain, LSrain'
+print, 'Rain composite'
+lag_ts_composite, ts, tsunits, predictand, error, dataunits, $
+                           t, tunits, nlags, NEG_BAD, label, YRANGE=[0,1]
+spawn, 'mv lag_ts_composite_output.sav ../LAGARRAYS/'+namestub+'.raincomp.sav'
+
+predictand = rainLS
+olag_ts_composite, ts, tsunits, predictand, error, dataunits, $
+                           t, tunits, nlags, NEG_BAD, label
+spawn, 'mv olag_ts_composite_output.sav ../LAGARRAYS/'+namestub+'.LSraincomp.sav'
+
+if( n_elements(rainLS2) gt 0) then begin
+    predictand = rainLS2
+    olag_ts_composite, ts, tsunits, predictand, error, dataunits, $
+      t, tunits, nlags, NEG_BAD, label
+    spawn, 'mv olag_ts_composite_output.sav ../LAGARRAYS/'+namestub+'.LS2raincomp.sav'
+endif
+
+;;;;;;;;;;;;;;;;;;;;;;;;;; Divergence and wind profiles
+!p.multi=[0,2,2]
+
+;;;;;;;;;;;;;;;; PANEL 1: TOTAL DIV AND SD
+meanprof = total(div,2) / NTIMES
+plot, meanprof, pplot, yra=[1000,100],ytit='p', xra=[-5,10], tit = 'div: mean, SD (10!U-6!N s!U-1!N)'
+  VER,0
+sdprof = meanprof*0
+for ip = 0, NLEVS-1 do sdprof(ip) = stdev(div(ip,*))
+oplot, sdprof, pplot, lines=1
+
+;;;;;;;;;;;;;;;; PANEL 2: REGRESSED DIV AND SD
+restore, 'div_regress.sav'
+
+meanprof = total(lagarray,1) / n_elements(LAGTIMEAXIS)
+plot, meanprof, pplot, yra=[1000,100],ytit='p', xra=[-5,10], tit = 'regression (10!U-6!N s!U-1!N per mm/h)'
+  VER,0
+sdprof = meanprof*0
+for ip = 0, NLEVS-1 do sdprof(ip) = stdev(lagarray(*,ip))
+oplot, sdprof, pplot, lines=1
+
+;;;;;;;;;;;;;;;; PANEL 3: MEAN VPLOT WIND
+meanprof = total(vplot,2) / NTIMES
+plot, meanprof, pplot, yra=[1000,100],ytit='p', xra=[-5,10], tit = 'v wind: mean, SD (m/s)'
+  VER,0
+sdprof = meanprof*0
+for ip = 0, NLEVS-1 do sdprof(ip) = stdev(vplot(ip,*))
+oplot, sdprof, pplot, lines=1
+
+;;;;;;;;;;;;;;;; PANEL 3: MEAN WIND SPEED
+ws = sqrt(uplot*uplot + VPLOT*VPLOT)
+meanprof = total(ws,2) / NTIMES
+plot, meanprof, pplot, yra=[1000,100],ytit='p', xra=[0,20], tit = 'wind speed: mean, SD (m/s)'
+  VER,0
+sdprof = meanprof*0
+for ip = 0, NLEVS-1 do sdprof(ip) = stdev(ws(ip,*))
+oplot, sdprof, pplot, lines=1

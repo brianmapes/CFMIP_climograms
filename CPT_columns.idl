@@ -1,0 +1,94 @@
+CPTlons = [ $
+	   -97.5,$
+	   166.9,$
+	   147.4,$
+	   130.9,$
+	   -156.6,$
+	   -165,$
+	   -148,$
+	   -125,$
+	   -62,$
+	   4.9,$
+	   145,$
+	   -85,$
+	   -51,$
+	   -140,$
+	   -145,$
+	   -125.1,$
+	   -125.2,$
+	   -156,$
+	   156,$
+	    -22,$ ;; GATE
+	    -95,$ ;; EPIC
+	   120]
+CPTlats = [ $
+	   36.4,$
+	   -0.5,$
+	   -2.1,$
+	   -12.4,$
+	   71.3,$
+	   5,$
+	   17,$
+	   35,$
+	   -11,$
+	   52,$
+	   -42,$
+	   -20,$
+	   15,$
+	   30,$
+	   50,$
+	   -8,$
+	   8,$
+	   -2,$
+	   -2,$
+	    12,$ ;; GATE
+	    10,$ ;; EPIC
+	   23.5]
+
+CPTnames = [ $
+	    'Oklahoma ARM',$
+	    'Nauru ARM',$
+	    'Manus ARM',$
+	    'Darwin ARM',$
+	    'Barrow ARM',$
+	    'EUSW Pacific section - SW end',$
+	    'EUMID Pacific section - middle',$
+	    'EUSE Pacific section - NE end',$
+	    'Amazonia',$
+	    'Cabaaw tower, Netherlands',$
+	    'Grim Tasmania',$
+	    'WHOI SE Pacific stratus buoy',$
+	    'Pirata',$ ;;15N,51W?
+	    'WSN',$
+	    'WSP',$
+	    'SE trades TAO buoy',$
+	    'ITCZ TAO buoy',$
+	    'COARE_err',$
+	    'COARE',$
+	    'GATE',$
+	    'EPIC',$
+	    'China Sea']
+
+CPTsites = [ $
+	    'Okl',$
+	    'Nau',$
+	    'Man',$
+	    'Dar',$
+	    'Bar',$
+	    'EuW',$
+	    'EuM',$
+	    'EuE',$
+	    'Amz',$
+	    'Cab',$
+	    'Tas',$
+	    'WHO',$
+	    'Pir',$ 
+	    'WSN',$
+	    'WSP',$
+	    '8S',$
+	    'ITC',$
+	    'nCOA',$
+	    'COA',$
+	    'GATE',$
+	    'EPIC',$
+	    'SCS']
